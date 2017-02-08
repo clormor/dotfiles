@@ -1,0 +1,21 @@
+[user]
+	email = clormor@palantir.com
+	name = Chris Lormor
+[core]
+  ignorecase = true
+  editor = vim
+	excludesfile = /Users/clormor/.gitignore_global
+[branch]
+  autosetuprebase = always
+[color]
+  ui = true
+[merge]
+  tool = vimdiff
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/clormor/.stCommitMsg
