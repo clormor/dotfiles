@@ -33,11 +33,11 @@ export GOTHAM_CONTAINERS_HOME=/Users/clormor/git/palantir/gotham-containers-cli
 export PGDEV_HOME=/Users/clormor/git/palantir/pgdev
 export DOCKER_HOST=tcp://localhost:2375
 
-export PATH=~/git/palantir/sandbox/sandbox-scripts:${PATH}
+export PATH=~/bin:${PATH}
 
-alias gw='find_gradle.sh'
+alias gw='find-gradle'
 # see https://prime.yojoe.local/question/2424/how-to-fix-build-path-contains-duplicate-entry-in-eclipsegradle-self-answered/
-alias gd="find_gradle.sh dependencies | grep '\-\-\-' | sed 's/.* \(.*\):\([^:]*\):\(.*\)/\2:\1/g' | sort | uniq | sed 's/\([^:]*\):\([^:]*\)\(.*\)/\1/g' | uniq -d"
+alias gd="find-gradle dependencies | grep '\-\-\-' | sed 's/.* \(.*\):\([^:]*\):\(.*\)/\2:\1/g' | sort | uniq | sed 's/\([^:]*\):\([^:]*\)\(.*\)/\1/g' | uniq -d"
 alias gf='git-flow'
 
 export HOMEBREW_EDITOR=/usr/bin/vim
