@@ -39,4 +39,5 @@
 .tooling/
 .vagrant.d/
 .viminfo
+.vim/.netrwhist
 !README.md
