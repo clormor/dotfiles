@@ -15,10 +15,10 @@ This can be dangerous if done incorrectly, so best to follow these steps;
 At this point, git will throw an error with a list of untracked files and directories. Manually *move* these files and directories to a backup location, e.g.
 
     # do this for each untracked file that git warns you about
-    mv .bashrc .bashrc.pregit
+    mv .bashrc .bashrc.backup
     ...
 
-Now that you can successfully pull;
+After that you can successfully pull;
 
     git pull origin master
 
