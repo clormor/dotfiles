@@ -5,12 +5,13 @@
   ignorecase = true
   editor = vim
 	excludesfile = /Users/clormor/.gitignore_global
+	autocrlf = input
 [branch]
   autosetuprebase = always
 [color]
   ui = true
 [merge]
-  tool = vimdiff
+	tool = diffmerge
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -19,3 +20,12 @@
 	trustExitCode = true
 [commit]
 	template = /Users/clormor/.stCommitMsg
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+	trustExitCode = false
+	cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[difftool]
+	prompt = false
