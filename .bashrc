@@ -31,7 +31,7 @@ alias info='info --vi-keys'
 #pgdev-hydration
 export GOTHAM_CONTAINERS_HOME=/Users/clormor/git/palantir/gotham-containers-cli
 export PGDEV_HOME=/Users/clormor/git/palantir/pgdev
-export DOCKER_HOST=tcp://localhost:2375
+#export DOCKER_HOST=tcp://localhost:2375
 
 export PATH=~/bin:${PATH}
 
