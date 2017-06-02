@@ -2,8 +2,8 @@ set nocompatible              " be iMproved, required
 "filetype off                  " required
 
 execute pathogen#infect()
-syntax on
 filetype plugin indent on
+syntax on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,7 +17,6 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on
 
 set number
 :syntax on
@@ -46,10 +45,11 @@ let g:LatexBox_latexmk_async=0
 let g:LatexBox_latexmk_preview_continuously=1
 let g:LatexBox_quickfix=2
 let g:LaTeXBox_output_type='' "Let latexmkrc choose the type 
-"if s:extfname ==? "tex"
-"    let g:LatexBox_split_type="new"
- "   let g:LatexBox_latexmk_preview_continuously=1
-  "  let g:LatexBox_quickfix=2
-"endif
+let s:extfname = expand("%:e")
+if s:extfname ==? "tex"
+    let g:LatexBox_split_type="new"
+    let g:LatexBox_latexmk_preview_continuously=1
+    let g:LatexBox_quickfix=2
+endif
 
 au BufReadCmd *.jar,*.xpi,*.par call zip#Browse(expand("<amatch>"))
