@@ -44,3 +44,7 @@ export HOMEBREW_EDITOR=/usr/bin/vim
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="/Users/clormor/git/palantir/insta-bin/bin:$PATH"
+
+export JAVA_1_6_HOME=~/.jenv/versions/1.6
+export JAVA_1_7_HOME=~/.jenv/versions/1.7
+
