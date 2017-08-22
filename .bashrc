@@ -49,3 +49,7 @@ export PATH="/usr/local/share/python:$PATH"
 export JAVA_1_6_HOME=~/.jenv/versions/1.6
 export JAVA_1_7_HOME=~/.jenv/versions/1.7
 
+if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
+  source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
+fi
