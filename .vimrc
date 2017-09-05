@@ -28,11 +28,13 @@ set shiftwidth=4
 set smarttab
 set expandtab
 set autoindent
+set showmode
 "
 set viminfo='100,h
 "
 map <F2> :set number!<CR>
-map <F3> :set autoindent!<CR>
+nnoremap <F3> :set invpaste paste?<CR>
+set pastetoggle=<F3>
 map <F4> :set spell! spelllang=en_us<CR>
 map <F5> <ESC>:1,$!xmllint --format -<CR>
 
