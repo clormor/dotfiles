@@ -2,3 +2,5 @@
 .*.DS_Store
 .*.swp
 .DS_Store
+.bash-git-rc
+
