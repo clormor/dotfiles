@@ -1,10 +1,10 @@
 !README.md
 !.bash_profile
 !.bashrc
+!.bash-git-rc
 !.gitconfig
 !.gitignore_global
 !.hgignore_global
-!.iterm2_shell_integration.bash
 !.mkshrc
 !.profile
 !.stCommitMsg
