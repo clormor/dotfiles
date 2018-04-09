@@ -4,8 +4,11 @@
 [core]
   ignorecase = true
   editor = vim
-	excludesfile = /Users/clormor/.gitignore_global
-	autocrlf = input
+  excludesfile = /Users/clormor/.gitignore_global
+  autocrlf = input
+  whitespace = trailing-space,space-before-tab
+[apply]
+  whitespace = fix
 [branch]
   autosetuprebase = always
 [color]
