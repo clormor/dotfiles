@@ -14,6 +14,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias sl='ls' # because I commonly type sl (and don't want a steam locomotive)
+
+# use gnu-tar
+alias tar='gtar'
  
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
