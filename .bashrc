@@ -1,8 +1,3 @@
-#if [ -f $(brew --prefix)/etc/bash_completion ]; then
-#  . $(brew --prefix)/etc/bash_completion
-#  PROG=insta source /usr/local/Library/Taps/palantir/homebrew-insta/autocomplete/bash_autocomplete
-#fi
-
 # aliasble color support for grep
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -12,8 +7,6 @@ alias egrep='egrep --color=auto'
 alias ls='ls -G' # color, the GNU way. The BSD way (non-GNU coreutils) is 'ls -G'
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
-alias sl='ls' # because I commonly type sl (and don't want a steam locomotive)
 
 # use gnu-tar
 alias tar='gtar'
@@ -21,8 +14,6 @@ alias tar='gtar'
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
 alias gits='git status'
-alias gitb='git branch'
-alias gitp='git push && git push --tags'
 alias gp='git push && git push --tags'
  
 # tmux aliases
@@ -31,29 +22,23 @@ alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in
 # misc aliases
 alias info='info --vi-keys'
 
-#pgdev-hydration
-export GOTHAM_CONTAINERS_HOME=/Users/clormor/git/palantir/gotham-containers-cli
-export PGDEV_HOME=/Users/clormor/git/palantir/pgdev
-#export DOCKER_HOST=tcp://localhost:2375
-
 export PATH=~/bin:${PATH}
 
 alias gw='find-gradle'
-# see https://prime.yojoe.local/question/2424/how-to-fix-build-path-contains-duplicate-entry-in-eclipsegradle-self-answered/
-alias gd="find-gradle dependencies | grep '\-\-\-' | sed 's/.* \(.*\):\([^:]*\):\(.*\)/\2:\1/g' | sort | uniq | sed 's/\([^:]*\):\([^:]*\)\(.*\)/\1/g' | uniq -d"
-alias gf='git-flow'
 
 export HOMEBREW_EDITOR=/usr/bin/vim
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="/Users/clormor/git/palantir/insta-bin/bin:$PATH"
-export PATH="/usr/local/share/python:$PATH"
-
-export JAVA_1_6_HOME=~/.jenv/versions/1.6
-export JAVA_1_7_HOME=~/.jenv/versions/1.7
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
-#if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-#  __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
-#  source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
-#fi
+export NEXUS_KEY_ID=0ED95D3C
+export NEXUS_KEY_PASSWORD=8PZ2WE32uP6gHiVdkh7m2
+export NEXUS_KEY_FILE=/Users/clormor/.gnupg/secring.gpg
+export NEXUS_USER=clormor
+export NEXUS_PASSWORD="umW.AM8:!um-rNW"
+
+if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
+  source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
+PIPENV_DEFAULT_PYTHON_VERSION=3.7
