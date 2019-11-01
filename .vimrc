@@ -1,57 +1,84 @@
-set nocompatible              " be iMproved, required
-"filetype off                  " required
+set nocompatible
 
 execute pathogen#infect()
-filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
 syntax on
 
-" set the runtime path to include Vundle and initialize
+" initialize Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
+call vundle#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+function SetDefaultKeyMappings()
+    map <F2> :set number!<CR>
+    map <F4> :set spell! spelllang=en_gb<CR>
+    map <F5> <ESC>:1,$!xmllint --format -<CR>
+    nnoremap <F3> :set invpaste paste?<CR>
+    set pastetoggle=<F3>
+endfunction
 
-set number
-:syntax on
-set background=dark
-"
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set smarttab
-set expandtab
-set autoindent
-set showmode
-"
-set viminfo='100,h
-"
-map <F2> :set number!<CR>
-nnoremap <F3> :set invpaste paste?<CR>
-set pastetoggle=<F3>
-map <F4> :set spell! spelllang=en_us<CR>
-map <F5> <ESC>:1,$!xmllint --format -<CR>
+function SetDefaultSettings()
+    set number
+    :syntax on
+    set background=dark
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+    set smarttab
+    set expandtab
+    set autoindent
+    set showmode
+    set ruler
+    set viminfo='100,h
+endfunction
 
-command Lm Latexmk
-
-" LaTeX:
-let g:tex_flavor='latex'
-autocmd FileType tex set wrap linebreak
-let g:LatexBox_latexmk_async=0
-let g:LatexBox_latexmk_preview_continuously=1
-let g:LatexBox_quickfix=2
-let g:LaTeXBox_output_type='' "Let latexmkrc choose the type 
-let s:extfname = expand("%:e")
-if s:extfname ==? "tex"
-    let g:LatexBox_split_type="new"
+function SetLatexOptions()
+    command Lm Latexmk
+    let g:tex_flavor='latex'
+    set wrap linebreak
+    let g:LatexBox_latexmk_async=0
     let g:LatexBox_latexmk_preview_continuously=1
     let g:LatexBox_quickfix=2
-endif
+    let g:LaTeXBox_output_type=''
+    let s:extfname = expand("%:e")
+    if s:extfname ==? "tex"
+        let g:LatexBox_split_type="new"
+        let g:LatexBox_latexmk_preview_continuously=1
+        let g:LatexBox_quickfix=2
+    endif
+endfunction
 
-au BufReadCmd *.jar,*.xpi,*.par call zip#Browse(expand("<amatch>"))
+function SetMarkdownOptions()
+    set textwidth=80
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=0 guibg=lightgrey
+    set formatoptions+=t
+    set wrap linebreak
+endfunction
+
+function SetYamlOptions()
+    setlocal ts=2 sts=2 sw=2 expandtab
+endfunction
+
+function SetZipOptions()
+    " allow opening of zip files including jars/pars
+    call zip#Browse(expand("<amatch>"))
+endfunction
+
+call SetDefaultKeyMappings()
+call SetDefaultSettings()
+
+" treat jars/pars as zip files
+au BufReadCmd *.jar,*.xpi,*.par call SetZipOptions()
+
+" ensure we configure yml and yaml files the same way
+autocmd FileType yaml call SetYamlOptions()
+autocmd FileType yml call SetYamlOptions()
+
+" make sure we correctly detect markdown files
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown
+autocmd Filetype markdown call SetMarkdownOptions()
