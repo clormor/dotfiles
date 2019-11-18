@@ -19,6 +19,18 @@ alias gp='git push && git push --tags'
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in tmux + iterm
  
+# insta aliases
+if [ -f /usr/local/opt/insta/bin/insta ]; then
+    alias il='insta list'
+    alias iup='insta start'
+    alias idown='insta down'
+    alias ipg='insta workspace'
+    alias ipem='insta pem'
+    alias ig='insta gemini'
+    alias issh='insta ssh'
+    alias iscp='insta scp'
+fi
+
 # misc aliases
 alias info='info --vi-keys'
 
@@ -42,3 +54,5 @@ if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
 fi
 
 PIPENV_DEFAULT_PYTHON_VERSION=3.7
+
+export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
