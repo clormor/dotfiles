@@ -1,17 +1,28 @@
 set nocompatible
 
-execute pathogen#infect()
 filetype on
 filetype plugin on
 filetype indent on
 syntax on
 
-" initialize Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-call vundle#end()
+function SetPathogen()
+    " see https://github.com/tpope/vim-pathogen
+    if !empty(glob("~/.vim/autoload/pathogen.vim"))
+        execute pathogen#infect()
+    endif
+endfunction
+
+function SetVundle()
+    " see https://github.com/VundleVim/Vundle.vim
+    if !empty(glob("~/.vim/bundle/Vundle.vim"))
+        set rtp+=~/.vim/bundle/Vundle.vim
+        call vundle#begin()
+        Plugin 'VundleVim/Vundle.vim'
+        " if not yet installed, launch vim and run :PluginInstall
+        Plugin 'LaTeX-Box-Team/LaTeX-Box'
+        call vundle#end()
+    endif
+endfunction
 
 function SetDefaultKeyMappings()
     map <F2> :set number!<CR>
@@ -69,6 +80,8 @@ function SetZipOptions()
     call zip#Browse(expand("<amatch>"))
 endfunction
 
+call SetPathogen()
+call SetVundle()
 call SetDefaultKeyMappings()
 call SetDefaultSettings()
 
