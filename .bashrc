@@ -33,28 +33,30 @@ fi
 
 # misc aliases
 alias info='info --vi-keys'
+if [ -f ~/bin/find-gradle ]
+then
+    alias gw='find-gradle'
+fi
 
-export PATH=~/bin:${PATH}
+# configure bash-git-prompt
+if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
+    GIT_PRMOPT_FETCH_REMOTE_STATUS=0
+    GIT_PRMOPT_ONLY_IN_REPO=1
+    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
 
-alias gw='find-gradle'
-
+# configure environment variables
+export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
-
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-
 export NEXUS_KEY_ID=0ED95D3C
 export NEXUS_KEY_PASSWORD=8PZ2WE32uP6gHiVdkh7m2
 export NEXUS_KEY_FILE=/Users/clormor/.gnupg/secring.gpg
 export NEXUS_USER=clormor
 export NEXUS_PASSWORD="umW.AM8:!um-rNW"
-
-if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
-  source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
-fi
-
+export PATH=~/bin:${PATH}
 PIPENV_DEFAULT_PYTHON_VERSION=3.7
 
-export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
-
+# other stuff
 tabs 4
