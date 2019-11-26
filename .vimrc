@@ -63,12 +63,22 @@ function SetLatexOptions()
     endif
 endfunction
 
-function SetMarkdownOptions()
+function SetWidthTo80()
     set textwidth=80
     set colorcolumn=80
     highlight ColorColumn ctermbg=0 guibg=lightgrey
-    set formatoptions+=t
+    " don't wrap a word over multiple lines
     set wrap linebreak
+endfunction
+
+function SetMarkdownOptions()
+    call SetWidthTo80()
+    " don't continue comment on new lines
+    set formatoptions+=t
+endfunction
+
+function SetShellOptions()
+    call SetWidthTo80()
 endfunction
 
 function SetYamlOptions()
@@ -91,6 +101,8 @@ au BufReadCmd *.jar,*.xpi,*.par call SetZipOptions()
 " ensure we configure yml and yaml files the same way
 autocmd FileType yaml call SetYamlOptions()
 autocmd FileType yml call SetYamlOptions()
+
+autocmd FileType sh call SetShellOptions()
 
 " make sure we correctly detect markdown files
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown

@@ -28,3 +28,6 @@
 	prompt = false
 [pull]
 	rebase = true
+[filesystem "Azul Systems, Inc.|1.8.0_221|/dev/disk1s5"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
