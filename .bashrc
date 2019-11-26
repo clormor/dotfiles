@@ -80,6 +80,3 @@ export NEXUS_USER=clormor
 export NEXUS_PASSWORD="umW.AM8:!um-rNW"
 export PATH=~/bin:${PATH}
 PIPENV_DEFAULT_PYTHON_VERSION=3.7
-
-# other stuff
-tabs 4
