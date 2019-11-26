@@ -46,6 +46,22 @@ if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
+# configure rvm
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]
+then
+    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+fi
+
+# configure iterm2 if installed
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# configure rbenv
+if [ -d "$(brew --prefix)/opt/rbenv" ]
+then
+    eval "$(rbenv init -)"
+fi
+
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim

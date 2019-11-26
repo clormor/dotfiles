@@ -1,11 +1,13 @@
 export PATH="/usr/local/sbin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+ulimit -n 10000
 
 if [ -f ~/.bashrc ]; then
   source ~/.bashrc
 fi
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+if [ -f ~/.profile ]; then
+  source ~/.profile
+fi
 
-source ~/.profile
-
-eval "$(rbenv init -)"
