@@ -5,7 +5,7 @@ alias egrep='egrep --color=auto'
  
 # some ls aliases
 alias ls='ls -G' # color, the GNU way. The BSD way (non-GNU coreutils) is 'ls -G'
-alias ll='ls -alF'
+alias ll='ls -lF'
 alias la='ls -A'
 
 # use gnu-tar
@@ -60,6 +60,13 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 if [ -d "$(brew --prefix)/opt/rbenv" ]
 then
     eval "$(rbenv init -)"
+fi
+
+# configure java home
+cached_jdk=$(find ~/.gradle/caches/jdks/macosx -type d -regex ".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}" | sort -V | tail -n 1)
+if [ -d $cached_jdk ]
+then
+    export JAVA_HOME=$cached_jdk
 fi
 
 # configure environment variables
