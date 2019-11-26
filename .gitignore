@@ -2,6 +2,7 @@
 !.bash_profile
 !.bashrc
 !.bash-git-rc
+!.brewfile
 !.gitconfig
 !.gitignore_global
 !.hgignore_global
@@ -10,5 +11,4 @@
 !.stCommitMsg
 !.vimrc
 !.zshrc
-!Brewfile
 *
