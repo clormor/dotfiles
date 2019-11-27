@@ -6,8 +6,6 @@ to re-create when moving between machines (e.g. `.bash_profile`, `.vimrc`).
 
 ## How to safely clone
 
-This can be dangerous if done incorrectly, so best to follow these steps;
-
     cd ~
     git init
     git remote add origin git@github.com:clormor/home-directory.git
