@@ -1,31 +1,31 @@
 [user]
-	email = clormor@palantir.com
-	name = Chris Lormor
+    email = clormor@palantir.com
+    name = Chris Lormor
 [core]
-  ignorecase = true
-  editor = vim
-  excludesfile = /Users/clormor/.gitignore_global
-  autocrlf = input
-  whitespace = trailing-space,space-before-tab
+    ignorecase = true
+    editor = vim
+    excludesfile = /Users/clormor/.gitignore_global
+    autocrlf = input
+    whitespace = trailing-space,space-before-tab
 [apply]
-  whitespace = fix
+    whitespace = fix
 [branch]
-  autosetuprebase = always
+    autosetuprebase = always
 [color]
-  ui = true
+    ui = true
 [merge]
-	tool = diffmerge
+    tool = diffmerge
 [commit]
-	template = /Users/clormor/.stCommitMsg
+    template = /Users/clormor/.stCommitMsg
 [diff]
-	tool = diffmerge
+    tool = diffmerge
 [difftool "diffmerge"]
-	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+    cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [mergetool "diffmerge"]
-	trustExitCode = false
-	cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    trustExitCode = false
+    cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [difftool]
-	prompt = false
+    prompt = false
 [pull]
 	rebase = true
 [filesystem "Azul Systems, Inc.|1.8.0_221|/dev/disk1s5"]
