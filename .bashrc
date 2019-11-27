@@ -53,8 +53,11 @@ then
     source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
-# configure iterm2 if installed
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# configure iterm2
+if [ -e "${HOME}/.iterm2_shell_integration.bash" ]
+then
+    source "${HOME}/.iterm2_shell_integration.bash"
+fi
 
 # configure rbenv
 if [ -d "$(brew --prefix)/opt/rbenv" ]
@@ -69,14 +72,15 @@ then
     export JAVA_HOME=$cached_jdk
 fi
 
+# source nexus credentials
+if [ -f ~/.nexus ]
+then
+    source ~/.nexus
+fi
+
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export NEXUS_KEY_ID=0ED95D3C
-export NEXUS_KEY_PASSWORD=8PZ2WE32uP6gHiVdkh7m2
-export NEXUS_KEY_FILE=/Users/clormor/.gnupg/secring.gpg
-export NEXUS_USER=clormor
-export NEXUS_PASSWORD="umW.AM8:!um-rNW"
 export PATH=~/bin:${PATH}
-PIPENV_DEFAULT_PYTHON_VERSION=3.7
+export PIPENV_DEFAULT_PYTHON_VERSION=3.7
