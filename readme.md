@@ -1,9 +1,10 @@
-# Home Directory
+Home Directory
+==============
 
 A selection of files in my home directory (mostly hidden files) that are painful
 to re-create when moving between machines (e.g. `.bash_profile`, `.vimrc`).
 
-## Important - How to clone
+## How to safely clone
 
 This can be dangerous if done incorrectly, so best to follow these steps;
 
@@ -24,4 +25,3 @@ e.g.
 After that you can successfully pull;
 
     git pull origin master
-
