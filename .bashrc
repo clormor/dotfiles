@@ -78,6 +78,12 @@ then
     source ~/.nexus
 fi
 
+# add palantir scripts to PATH
+if [ -d $HOME/pbin ]
+then
+    export PATH="$PATH:$HOME/pbin"
+fi
+
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
