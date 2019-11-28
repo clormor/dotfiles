@@ -65,12 +65,19 @@ then
     eval "$(rbenv init -)"
 fi
 
-# configure java home
-cached_jdk=$(find ~/.gradle/caches/jdks/macosx -type d -regex ".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}" | sort -V | tail -n 1)
+# configure legacy java versions for palantir builds
+cached_jdk=$(find ${GRADLE_HOME:-"~/.gradle"}/caches/jdks/macosx -type d -regex ".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}" | sort -V | tail -n 1)
 if [ -d $cached_jdk ]
 then
-    export JAVA_HOME=$cached_jdk
+    export JAVA_8_HOME=$cached_jdk
+    export JAVA_1_8_HOME=$cached_jdk
 fi
+if [ -d /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home ]
+then
+    export JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+    export JAVA_1_6_HOME=$JAVA_6_HOME
+fi
+
 
 # source nexus credentials
 if [ -f ~/.nexus ]
