@@ -72,12 +72,12 @@ then
     export JAVA_8_HOME=$cached_jdk
     export JAVA_1_8_HOME=$cached_jdk
 fi
+
 if [ -d /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home ]
 then
     export JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
     export JAVA_1_6_HOME=$JAVA_6_HOME
 fi
-
 
 # source nexus credentials
 if [ -f ~/.nexus ]
