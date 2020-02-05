@@ -1,5 +1,5 @@
 export PATH="/usr/local/sbin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home -F -v1.8)
 export GRADLE_HOME=$HOME/.gradle
 
 ulimit -n 10000

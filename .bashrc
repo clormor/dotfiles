@@ -97,3 +97,4 @@ export HOMEBREW_EDITOR=/usr/bin/vim
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PATH=~/bin:${PATH}
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
+export PATH="/usr/local/opt/coreutils/libexec/gnubin/:$PATH"

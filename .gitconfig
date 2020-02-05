@@ -31,3 +31,8 @@
 [filesystem "Azul Systems, Inc.|1.8.0_221|/dev/disk1s5"]
 	timestampResolution = 1001 milliseconds
 	minRacyThreshold = 0 nanoseconds
+[filesystem "Azul Systems, Inc.|1.8.0_232|/dev/disk1s5"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
+[advice]
+	detachedHead = false
