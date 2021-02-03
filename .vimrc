@@ -35,7 +35,7 @@ endfunction
 function SetDefaultSettings()
     set number
     :syntax on
-    set background=dark
+    "set background=dark
     set tabstop=4
     set softtabstop=4
     set shiftwidth=4
@@ -45,6 +45,9 @@ function SetDefaultSettings()
     set showmode
     set ruler
     set viminfo='100,h
+    if has("autocmd")
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    endif
 endfunction
 
 function SetLatexOptions()
@@ -71,6 +74,14 @@ function SetWidthTo80()
     set wrap linebreak
 endfunction
 
+function SetWidthTo120()
+    set textwidth=120
+    set colorcolumn=120
+    highlight ColorColumn ctermbg=0 guibg=lightgrey
+    " don't wrap a word over multiple lines
+    set wrap linebreak
+endfunction
+
 function SetMarkdownOptions()
     call SetWidthTo80()
     " don't continue comment on new lines
@@ -78,7 +89,7 @@ function SetMarkdownOptions()
 endfunction
 
 function SetShellOptions()
-    call SetWidthTo80()
+    call SetWidthTo120()
 endfunction
 
 function SetYamlOptions()
@@ -90,6 +101,7 @@ function SetZipOptions()
     call zip#Browse(expand("<amatch>"))
 endfunction
 
+call SetLatexOptions()
 call SetPathogen()
 call SetVundle()
 call SetDefaultKeyMappings()

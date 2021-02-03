@@ -1,3 +1,10 @@
+# setup git-completion
+GIT_COMPLETION_DIR="$HOME/.git-completion"
+if [ -d $GIT_COMPLETION_DIR ]
+then
+    source $GIT_COMPLETION_DIR
+fi
+
 # aliasble color support for grep
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -21,9 +28,8 @@ alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in
  
 # insta aliases
 if [ -f /usr/local/opt/insta/bin/insta ]; then
-    alias il='insta list'
     alias iup='insta start'
-    alias idown='insta down'
+    alias idown='insta stop'
     alias ipg='insta workspace'
     alias ipem='insta pem'
     alias ig='insta gemini'
@@ -36,6 +42,12 @@ alias info='info --vi-keys'
 if [ -f ~/bin/find-gradle ]
 then
     alias gw='find-gradle'
+fi
+
+# configure gradle
+GIT_VOLUME=/Volumes/git
+if [ -d $GIT_VOLUME ]; then
+    export GRADLE_USER_HOME="$GIT_VOLUME/.gradle"
 fi
 
 # configure bash-git-prompt
@@ -53,7 +65,7 @@ then
     source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
-# configure iterm2
+# configure iterm2 shell integration
 if [ -e "${HOME}/.iterm2_shell_integration.bash" ]
 then
     source "${HOME}/.iterm2_shell_integration.bash"
@@ -66,11 +78,30 @@ then
 fi
 
 # configure legacy java versions for palantir builds
-cached_jdk=$(find ${GRADLE_HOME:-"~/.gradle"}/caches/jdks/macosx -type d -regex ".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}" | sort -V | tail -n 1)
-if [ -d $cached_jdk ]
+if [ -d ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx ]
 then
-    export JAVA_8_HOME=$cached_jdk
-    export JAVA_1_8_HOME=$cached_jdk
+    jdk_regex=".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}"
+    cached_jdk=$(find ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx \
+        -type d \
+        -regex $jdk_regex \
+        | sort -V \
+        | tail -n 1)
+    if [ -d $cached_jdk ]
+    then
+        export JAVA_8_HOME=$cached_jdk
+        export JAVA_1_8_HOME=$cached_jdk
+    fi
+fi
+
+OSX_JAVA_HOME_BIN=/usr/libexec/java_home
+if [ -f $OSX_JAVA_HOME_BIN ]
+then
+    jdk_8=$(/usr/libexec/java_home -v 1.8)
+    if [ -d $jdk_8 ]
+    then
+        export JAVA_8_HOME=$jdk_8
+        export JAVA_1_8_HOME=$jdk_8
+    fi
 fi
 
 if [ -d /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home ]
@@ -79,22 +110,40 @@ then
     export JAVA_1_6_HOME=$JAVA_6_HOME
 fi
 
+function prepend_path_if_exists {
+    if [ -d $1 ]
+    then
+        PATH="$1:$PATH"
+    fi
+}
+
+function append_path_if_exists {
+    if [ -d $1 ]
+    then
+        PATH="$PATH:$1"
+    fi
+}
+
+# configure legacy node
+append_path_if_exists "/usr/local/opt/node@10/bin"
+prepend_path_if_exists "~/.gem/ruby/2.6.0/bin"
+
 # source nexus credentials
 if [ -f ~/.nexus ]
 then
     source ~/.nexus
 fi
 
-# add palantir scripts to PATH
-if [ -d $HOME/pbin ]
-then
-    export PATH="$PATH:$HOME/pbin"
-fi
+# add custom scripts to PATH
+prepend_path_if_exists "$HOME/bin"
+prepend_path_if_exists "$HOME/pbin"
 
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export PATH=~/bin:${PATH}
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
-export PATH="/usr/local/opt/coreutils/libexec/gnubin/:$PATH"
+prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
+
+# I will migrate to zsh when i can, i promise
+export BASH_SILENCE_DEPRECATION_WARNING=1
