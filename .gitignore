@@ -6,8 +6,8 @@
 !/.gitconfig
 !/.gitignore_global
 !/.mkshrc
-!/personalize
 !/.profile
 !/.vimrc
 !/.zshrc
+!/install.sh
 !/readme.md
