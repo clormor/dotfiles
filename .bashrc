@@ -50,12 +50,16 @@ if [ -d $GIT_VOLUME ]; then
     export GRADLE_USER_HOME="$GIT_VOLUME/.gradle"
 fi
 
-# configure bash-git-prompt
-if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-    __GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
-    GIT_PRMOPT_FETCH_REMOTE_STATUS=0
-    GIT_PRMOPT_ONLY_IN_REPO=1
-    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+BREW_PREFIX=$(brew --prefix 2>/dev/null)
+if [ -d "$BREW_PREFIX" ]
+then
+    # configure bash-git-prompt
+    if [ -f "$BREW_PREFIX/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+        __GIT_PROMPT_DIR="$BREW_PREFIX/opt/bash-git-prompt/share"
+        GIT_PRMOPT_FETCH_REMOTE_STATUS=0
+        GIT_PRMOPT_ONLY_IN_REPO=1
+        source "$BREW_PREFIX/opt/bash-git-prompt/share/gitprompt.sh"
+    fi
 fi
 
 # configure rvm
@@ -72,7 +76,7 @@ then
 fi
 
 # configure rbenv
-if [ -d "$(brew --prefix)/opt/rbenv" ]
+if [ -d "$BREW_PREFIX/opt/rbenv" ]
 then
     eval "$(rbenv init -)"
 fi
