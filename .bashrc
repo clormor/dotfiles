@@ -17,6 +17,8 @@ alias la='ls -A'
 
 # use gnu-tar
 alias tar='gtar'
+# I literally always want this
+alias sed='sed -E'
  
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
@@ -44,7 +46,7 @@ then
     alias gw='find-gradle'
 fi
 
-# configure gradle
+# configure gradle user home
 GIT_VOLUME=/Volumes/git
 if [ -d $GIT_VOLUME ]; then
     export GRADLE_USER_HOME="$GIT_VOLUME/.gradle"
@@ -81,38 +83,40 @@ then
     eval "$(rbenv init -)"
 fi
 
-# configure legacy java versions for palantir builds
-if [ -d ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx ]
-then
-    jdk_regex=".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}"
-    cached_jdk=$(find ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx \
-        -type d \
-        -regex $jdk_regex \
-        | sort -V \
-        | tail -n 1)
-    if [ -d $cached_jdk ]
-    then
-        export JAVA_8_HOME=$cached_jdk
-        export JAVA_1_8_HOME=$cached_jdk
-    fi
-fi
+# configure legacy java versions for legace palantir builds
+# (should not be needed in recent pgdev versions)
+#if [ -d ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx ]
+#then
+#    jdk_regex=".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}"
+#    cached_jdk=$(find ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx \
+#        -type d \
+#        -regex $jdk_regex \
+#        | sort -V \
+#        | tail -n 1)
+#    if [ -d $cached_jdk ]
+#    then
+#        export JAVA_8_HOME=$cached_jdk
+#        export JAVA_1_8_HOME=$cached_jdk
+#    fi
+#fi
 
-OSX_JAVA_HOME_BIN=/usr/libexec/java_home
-if [ -f $OSX_JAVA_HOME_BIN ]
-then
-    jdk_8=$(/usr/libexec/java_home -v 1.8)
-    if [ -d $jdk_8 ]
-    then
-        export JAVA_8_HOME=$jdk_8
-        export JAVA_1_8_HOME=$jdk_8
-    fi
-fi
+#OSX_JAVA_HOME_BIN=/usr/libexec/java_home
+#if [ -f $OSX_JAVA_HOME_BIN ]
+#then
+#    OSX_JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
+#    if [ -d $OSX_JAVA_8_HOME ]
+#    then
+#        export JAVA_8_HOME=$OSX_JAVA_8_HOME
+#        export JAVA_1_8_HOME=$OSX_JAVA_8_HOME
+#    fi
+#fi
 
-if [ -d /Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home ]
-then
-    export JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-    export JAVA_1_6_HOME=$JAVA_6_HOME
-fi
+#OSX_JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+#if [ -d $OSX_JAVA_6_HOME ]
+#then
+#    export JAVA_6_HOME=$OSX_JAVA_6_HOME
+#    export JAVA_1_6_HOME=$OSX_JAVA_6_HOME
+#fi
 
 function prepend_path_if_exists {
     if [ -d $1 ]
@@ -149,5 +153,5 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
-# I will migrate to zsh when i can, i promise
+# I will migrate to zsh one day, i promise
 export BASH_SILENCE_DEPRECATION_WARNING=1
