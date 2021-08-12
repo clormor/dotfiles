@@ -32,10 +32,18 @@ function SetDefaultKeyMappings()
     set pastetoggle=<F3>
 endfunction
 
+function SetBackground()
+    " dark mode enabled?
+    if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+       set background=dark
+    else
+      set background=light
+    endif
+endfunction
+
 function SetDefaultSettings()
     set number
     :syntax on
-    "set background=dark
     set tabstop=4
     set softtabstop=4
     set shiftwidth=4
@@ -105,6 +113,7 @@ call SetLatexOptions()
 call SetPathogen()
 call SetVundle()
 call SetDefaultKeyMappings()
+call SetBackground()
 call SetDefaultSettings()
 
 " treat jars/pars as zip files

@@ -36,3 +36,5 @@
 	minRacyThreshold = 0 nanoseconds
 [advice]
 	detachedHead = false
+[push]
+    default = current

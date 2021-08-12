@@ -1,8 +1,8 @@
 # setup git-completion
-GIT_COMPLETION_DIR="$HOME/.git-completion"
-if [ -d $GIT_COMPLETION_DIR ]
+GIT_COMPLETION_CONFIG="$HOME/.git-completion"
+if [ -f $GIT_COMPLETION_CONFIG ]
 then
-    source $GIT_COMPLETION_DIR
+    source $GIT_COMPLETION_CONFIG
 fi
 
 # aliasble color support for grep
@@ -11,14 +11,13 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
  
 # some ls aliases
-alias ls='ls -G' # color, the GNU way. The BSD way (non-GNU coreutils) is 'ls -G'
-alias ll='ls -lF'
+#alias ls='ls -G' # color, the GNU way. The BSD way (non-GNU coreutilis) is 'ls -G'
+alias ls='ls --color=auto'
+alias ll='ls -lFG'
 alias la='ls -A'
 
 # use gnu-tar
 alias tar='gtar'
-# I literally always want this
-alias sed='sed -E'
  
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
@@ -50,6 +49,7 @@ fi
 GIT_VOLUME=/Volumes/git
 if [ -d $GIT_VOLUME ]; then
     export GRADLE_USER_HOME="$GIT_VOLUME/.gradle"
+    export GRADLECACHE_BACKUP_HOME="$GIT_VOLUME/.gradlecache-backups"
 fi
 
 BREW_PREFIX=$(brew --prefix 2>/dev/null)
@@ -60,6 +60,7 @@ then
         __GIT_PROMPT_DIR="$BREW_PREFIX/opt/bash-git-prompt/share"
         GIT_PRMOPT_FETCH_REMOTE_STATUS=0
         GIT_PRMOPT_ONLY_IN_REPO=1
+        GIT_PROMPT_THEME="Minimal_UserHost"
         source "$BREW_PREFIX/opt/bash-git-prompt/share/gitprompt.sh"
     fi
 fi
@@ -100,16 +101,16 @@ fi
 #    fi
 #fi
 
-#OSX_JAVA_HOME_BIN=/usr/libexec/java_home
-#if [ -f $OSX_JAVA_HOME_BIN ]
-#then
-#    OSX_JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
-#    if [ -d $OSX_JAVA_8_HOME ]
-#    then
-#        export JAVA_8_HOME=$OSX_JAVA_8_HOME
-#        export JAVA_1_8_HOME=$OSX_JAVA_8_HOME
-#    fi
-#fi
+OSX_JAVA_HOME_BIN=/usr/libexec/java_home
+if [ -f $OSX_JAVA_HOME_BIN ]
+then
+    OSX_JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
+    if [ -d $OSX_JAVA_8_HOME ]
+    then
+        export JAVA_8_HOME=$OSX_JAVA_8_HOME
+        export JAVA_1_8_HOME=$OSX_JAVA_8_HOME
+    fi
+fi
 
 #OSX_JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 #if [ -d $OSX_JAVA_6_HOME ]
@@ -132,6 +133,13 @@ function append_path_if_exists {
     fi
 }
 
+function source_if_exists {
+    if [ -f $1 ]
+    then
+        source $1
+    fi
+}
+
 # configure legacy node
 append_path_if_exists "/usr/local/opt/node@10/bin"
 prepend_path_if_exists "~/.gem/ruby/2.6.0/bin"
@@ -145,6 +153,8 @@ fi
 # add custom scripts to PATH
 prepend_path_if_exists "$HOME/bin"
 prepend_path_if_exists "$HOME/pbin"
+
+source_if_exists "$HOME/pbin/.profile"
 
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
