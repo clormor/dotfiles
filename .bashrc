@@ -1,3 +1,11 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
 # setup git-completion
 GIT_COMPLETION_CONFIG="$HOME/.git-completion"
 if [ -f $GIT_COMPLETION_CONFIG ]
@@ -46,10 +54,10 @@ then
 fi
 
 # configure gradle user home
-GIT_VOLUME=/Volumes/git
-if [ -d $GIT_VOLUME ]; then
-    export GRADLE_USER_HOME="$GIT_VOLUME/.gradle"
-    export GRADLECACHE_BACKUP_HOME="$GIT_VOLUME/.gradlecache-backups"
+CUSTOM_GIT_VOLUME=/Volumes/git
+if [ -d $CUSTOM_GIT_VOLUME ]; then
+    export GRADLE_USER_HOME="$CUSTOM_GIT_VOLUME/.gradle"
+    export GRADLECACHE_BACKUP_HOME="$CUSTOM_GIT_VOLUME/.gradlecache-backups"
 fi
 
 BREW_PREFIX=$(brew --prefix 2>/dev/null)
@@ -84,40 +92,27 @@ then
     eval "$(rbenv init -)"
 fi
 
-# configure legacy java versions for legace palantir builds
-# (should not be needed in recent pgdev versions)
-#if [ -d ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx ]
-#then
-#    jdk_regex=".*/jdk[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}_[0-9]\{1,6\}"
-#    cached_jdk=$(find ${GRADLE_USER_HOME:-"$HOME/.gradle"}/caches/jdks/macosx \
-#        -type d \
-#        -regex $jdk_regex \
-#        | sort -V \
-#        | tail -n 1)
-#    if [ -d $cached_jdk ]
-#    then
-#        export JAVA_8_HOME=$cached_jdk
-#        export JAVA_1_8_HOME=$cached_jdk
-#    fi
-#fi
-
+#DESIRED_JAVA_VERSION="1.8"
+DESIRED_JAVA_VERSION=11
 OSX_JAVA_HOME_BIN=/usr/libexec/java_home
 if [ -f $OSX_JAVA_HOME_BIN ]
 then
-    OSX_JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
-    if [ -d $OSX_JAVA_8_HOME ]
+    JAVA_6_HOME=$($OSX_JAVA_HOME_BIN -v 1.6)
+    if [ -d $JAVA_6_HOME ]
     then
-        export JAVA_8_HOME=$OSX_JAVA_8_HOME
-        export JAVA_1_8_HOME=$OSX_JAVA_8_HOME
+        export JAVA_6_HOME
+    fi
+    JAVA_8_HOME=$($OSX_JAVA_HOME_BIN -v 1.8)
+    if [ -d $JAVA_8_HOME ]
+    then
+        export JAVA_8_HOME
+    fi
+    JAVA_HOME=$($OSX_JAVA_HOME_BIN -v $DESIRED_JAVA_VERSION)
+    if [ -d $JAVA_HOME ]
+    then
+        export JAVA_HOME
     fi
 fi
-
-#OSX_JAVA_6_HOME=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-#if [ -d $OSX_JAVA_6_HOME ]
-#then
-#    export JAVA_6_HOME=$OSX_JAVA_6_HOME
-#    export JAVA_1_6_HOME=$OSX_JAVA_6_HOME
-#fi
 
 function prepend_path_if_exists {
     if [ -d $1 ]
@@ -139,6 +134,8 @@ function source_if_exists {
         source $1
     fi
 }
+
+prepend_path_if_exists "/usr/local/sbin"
 
 # configure legacy node
 append_path_if_exists "/usr/local/opt/node@10/bin"
