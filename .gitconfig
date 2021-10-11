@@ -2,10 +2,11 @@
     email = clormor@palantir.com
     name = Chris Lormor
 [core]
-    ignorecase = true
+    autocrlf = input
     editor = vim
     excludesfile = /Users/clormor/.gitignore_global
-    autocrlf = input
+    ignorecase = true
+    longpaths = true
     whitespace = trailing-space,space-before-tab
 [apply]
     whitespace = fix
@@ -27,14 +28,14 @@
 [difftool]
     prompt = false
 [pull]
-	rebase = true
+    rebase = true
 [filesystem "Azul Systems, Inc.|1.8.0_221|/dev/disk1s5"]
-	timestampResolution = 1001 milliseconds
-	minRacyThreshold = 0 nanoseconds
+    timestampResolution = 1001 milliseconds
+    minRacyThreshold = 0 nanoseconds
 [filesystem "Azul Systems, Inc.|1.8.0_232|/dev/disk1s5"]
-	timestampResolution = 1001 milliseconds
-	minRacyThreshold = 0 nanoseconds
+    timestampResolution = 1001 milliseconds
+    minRacyThreshold = 0 nanoseconds
 [advice]
-	detachedHead = false
+    detachedHead = false
 [push]
     default = current
