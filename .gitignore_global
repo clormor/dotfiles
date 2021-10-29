@@ -3,4 +3,6 @@
 .*.swp
 .DS_Store
 .bash-git-rc
+.project
+.settings/
 
