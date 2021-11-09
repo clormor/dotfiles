@@ -73,6 +73,13 @@ then
     fi
 fi
 
+# configure non-brew bash-git-prompt
+BASH_GIT_PROMPT_HOME=${BASH_GIT_PROMPT_HOME:-${HOME}/.bash-git-prompt}
+if [ -f "${BASH_GIT_PROMPT_HOME}/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source ${BASH_GIT_PROMPT_HOME}/gitprompt.sh
+fi
+
 # configure rvm
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]
 then
