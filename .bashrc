@@ -30,7 +30,7 @@ alias tar='gtar'
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
 alias gits='git status'
-alias gp='git push && git push --tags'
+alias gp='git push -u && git push --tags'
  
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in tmux + iterm
