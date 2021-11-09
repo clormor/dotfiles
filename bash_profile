@@ -12,7 +12,7 @@ if [ -f ~/.profile ]; then
   source ~/.profile
 fi
 
-if [[ -d /Users/clormor/opt/miniconda/bin ]];then
+if [[ -d /Users/clormor/opt/miniconda3/bin ]];then
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/clormor/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
