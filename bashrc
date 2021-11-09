@@ -121,6 +121,11 @@ then
     fi
 fi
 
+# set display variable in coder environments
+if [ "$(whoami)" == "coder" ]; then
+    export DISPLAY=:90
+fi
+
 function prepend_path_if_exists {
     if [ -d $1 ]
     then
