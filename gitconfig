@@ -1,5 +1,5 @@
 [user]
-    email = clormor@palantir.com
+	email = clormor@palantir.com
     name = Chris Lormor
 [core]
     autocrlf = input
@@ -44,3 +44,5 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+[url "git@github.palantir.build:"]
+	insteadof = https://github.palantir.build/
