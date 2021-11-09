@@ -126,5 +126,5 @@ autocmd FileType yml call SetYamlOptions()
 autocmd FileType sh call SetShellOptions()
 
 " make sure we correctly detect markdown files
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md  setf markdown
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,README.md,readme.md  setf markdown
 autocmd Filetype markdown call SetMarkdownOptions()
