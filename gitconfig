@@ -1,6 +1,7 @@
 [user]
 	email = clormor@palantir.com
     name = Chris Lormor
+	signingkey = E63C726C5E12BC87038BDC32C64E954B815F4E5D
 [core]
     autocrlf = input
     editor = vim
@@ -18,6 +19,7 @@
     tool = diffmerge
 [commit]
     template = /Users/clormor/.stCommitMsg
+	gpgsign = true
 [diff]
     tool = diffmerge
 [difftool "diffmerge"]
@@ -46,3 +48,6 @@
     required = true
 [url "git@github.palantir.build:"]
 	insteadof = https://github.palantir.build/
+[tag]
+	gpgsign = true
+	forceSignAnnotated = true
