@@ -1,5 +1,6 @@
 # .bashrc
 
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -17,7 +18,7 @@ fi
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
- 
+
 # some ls aliases
 #alias ls='ls -G' # color, the GNU way. The BSD way (non-GNU coreutilis) is 'ls -G'
 alias ls='ls --color=auto'
@@ -26,15 +27,15 @@ alias la='ls -A'
 
 # use gnu-tar
 alias tar='gtar'
- 
+
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
 alias gits='git status'
 alias gp='git push -u && git push --tags'
- 
+
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in tmux + iterm
- 
+
 # insta aliases
 if [ -f /usr/local/opt/insta/bin/insta ]; then
     alias iup='insta start'
@@ -105,17 +106,17 @@ OSX_JAVA_HOME_BIN=/usr/libexec/java_home
 if [ -f $OSX_JAVA_HOME_BIN ]
 then
     JAVA_6_HOME=$($OSX_JAVA_HOME_BIN -v 1.6)
-    if [ -d $JAVA_6_HOME ]
+    if [ -d "$JAVA_6_HOME" ]
     then
         export JAVA_6_HOME
     fi
     JAVA_8_HOME=$($OSX_JAVA_HOME_BIN -v 1.8)
-    if [ -d $JAVA_8_HOME ]
+    if [ -d "$JAVA_8_HOME" ]
     then
         export JAVA_8_HOME
     fi
     JAVA_HOME=$($OSX_JAVA_HOME_BIN -v $DESIRED_JAVA_VERSION)
-    if [ -d $JAVA_HOME ]
+    if [ -d "$JAVA_HOME" ]
     then
         export JAVA_HOME
     fi

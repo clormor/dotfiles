@@ -50,4 +50,3 @@
 	insteadof = https://github.palantir.build/
 [tag]
 	gpgsign = true
-	forceSignAnnotated = true
