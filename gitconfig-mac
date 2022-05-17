@@ -1,0 +1,13 @@
+[user]
+    signingkey = E63C726C5E12BC87038BDC32C64E954B815F4E5D
+[diff]
+    tool = diffmerge
+[difftool]
+    prompt = false
+[difftool "diffmerge"]
+    cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+    tool = diffmerge
+[mergetool "diffmerge"]
+    trustExitCode = false
+    cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
