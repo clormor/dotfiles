@@ -1,14 +1,17 @@
+[includeIf "gitdir:**/coder/dotfiles/"]
+    path = ~/.gitconfig-work
+[includeIf "gitdir:**/pbin/"]
+    path = ~/.gitconfig-work
 [includeIf "gitdir:work/"]
     path = ~/.gitconfig-work
+[includeIf "gitdir:**/bin/"]
+    path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
-# TODO would be nice if this worked
-#[includeIf "hasconfig:remote.*.url:git@github.com/**"]
-#    path = ~/.gitconfig-personal
-#[includeIf "hasconfig:remote.*.url:git@github.palantir.build/**"]
-#	path = ~/.gitconfig-work
 [includeIf "gitdir:/Users/"]
     path = ~/.gitconfig-mac
+[includeIf "gitdir:/home/"]
+    path = ~/.gitconfig-linux
 [includeIf "gitdir:/c/"]
     path = ~/.gitconfig-gitbash
 [core]
@@ -24,9 +27,6 @@
     autosetuprebase = always
 [color]
     ui = true
-[commit]
-    template = ~/.stCommitMsg
-	gpgsign = true
 [pull]
     rebase = true
 [filesystem "Azul Systems, Inc.|1.8.0_221|/dev/disk1s5"]
