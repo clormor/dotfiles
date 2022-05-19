@@ -8,12 +8,12 @@
     path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
-[includeIf "gitdir:/Users/"]
+[includeIf "gitdir:**/git/"]
     path = ~/.gitconfig-mac
-[includeIf "gitdir:/home/"]
-    path = ~/.gitconfig-linux
-[includeIf "gitdir:/c/"]
-    path = ~/.gitconfig-gitbash
+[includeIf "gitdir:**/coder/"]
+    path = ~/.gitconfig-coder
+[includeIf "gitdir:**/GitHub/"]
+    path = ~/.gitconfig-windows
 [core]
     autocrlf = input
     editor = vim
