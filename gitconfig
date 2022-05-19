@@ -8,12 +8,14 @@
     path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
+[includeIf "gitdir:personal/"]
+    path = ~/.gitconfig-gpg
 [includeIf "gitdir:**/git/"]
-    path = ~/.gitconfig-mac
+    path = ~/.gitconfig-osx
 [includeIf "gitdir:**/coder/"]
-    path = ~/.gitconfig-coder
+    path = ~/.gitconfig-linux
 [includeIf "gitdir:**/GitHub/"]
-    path = ~/.gitconfig-windows
+    path = ~/.gitconfig-win
 [core]
     autocrlf = input
     editor = vim
@@ -44,5 +46,3 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-[tag]
-	gpgsign = true
