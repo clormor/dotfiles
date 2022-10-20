@@ -16,6 +16,9 @@
     path = ~/.gitconfig-linux
 [includeIf "gitdir:**/GitHub/"]
     path = ~/.gitconfig-win
+[includeIf "gitdir:/Users/"]
+    path = ~/.gitconfig-mac
+    path = ~/.gitconfig-sign-osx
 [core]
     autocrlf = input
     editor = vim
