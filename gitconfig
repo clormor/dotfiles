@@ -4,12 +4,11 @@
     path = ~/.gitconfig-work
 [includeIf "gitdir:work/"]
     path = ~/.gitconfig-work
+    path = ~/.gitconfig-gpg
 [includeIf "gitdir:**/bin/"]
     path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
-[includeIf "gitdir:personal/"]
-    path = ~/.gitconfig-gpg
 [includeIf "gitdir:**/git/"]
     path = ~/.gitconfig-osx
 [includeIf "gitdir:**/coder/"]
@@ -17,8 +16,7 @@
 [includeIf "gitdir:**/GitHub/"]
     path = ~/.gitconfig-win
 [includeIf "gitdir:/Users/"]
-    path = ~/.gitconfig-mac
-    path = ~/.gitconfig-sign-osx
+    path = ~/.gitconfig-osx
 [core]
     autocrlf = input
     editor = vim
