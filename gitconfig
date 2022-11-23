@@ -9,6 +9,7 @@
     path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
+    path = ~/.gitconfig-gpg
 [includeIf "gitdir:**/git/"]
     path = ~/.gitconfig-osx
 [includeIf "gitdir:**/coder/"]

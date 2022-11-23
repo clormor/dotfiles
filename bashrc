@@ -26,7 +26,9 @@ alias ll='ls -lFG'
 alias la='ls -A'
 
 # use gnu-tar
-alias tar='gtar'
+if [ "$(which gtar)" != "" ]; then
+    alias tar='gtar'
+fi
 
 # git aliases
 alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset %s"'
