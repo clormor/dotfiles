@@ -35,6 +35,8 @@ alias hlog='git log --date-order --all --graph --format="%C(green)%h %Creset%C(y
 alias gits='git status'
 alias gp='git push -u && git push --tags'
 alias sign="git rebase --exec 'git commit --amend --no-edit -n -S' ${1:-origin/develop}"
+alias rebase="git fetch && git rebase ${1:-origin/develop}"
+alias merge="git fetch && git merge ${1:-origin/develop}"
 
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in tmux + iterm
