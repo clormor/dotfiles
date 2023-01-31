@@ -59,6 +59,12 @@ then
     alias gw='find-gradle'
 fi
 
+which gpgconf >/dev/null
+gpgconf_available=$?
+if [ "$gpgconf_available" -eq "0" ]; then
+    alias gpgagent='gpgconf --launch gpg-agent'
+fi
+
 # configure gradle user home
 CUSTOM_GIT_VOLUME=/Volumes/git
 if [ -d $CUSTOM_GIT_VOLUME ]; then
@@ -110,11 +116,6 @@ DESIRED_JAVA_VERSION=11
 OSX_JAVA_HOME_BIN=/usr/libexec/java_home
 if [ -f $OSX_JAVA_HOME_BIN ]
 then
-    JAVA_6_HOME=$($OSX_JAVA_HOME_BIN -v 1.6)
-    if [ -d "$JAVA_6_HOME" ]
-    then
-        export JAVA_6_HOME
-    fi
     JAVA_8_HOME=$($OSX_JAVA_HOME_BIN -v 1.8)
     if [ -d "$JAVA_8_HOME" ]
     then
@@ -139,13 +140,6 @@ function prepend_path_if_exists {
     fi
 }
 
-function append_path_if_exists {
-    if [ -d $1 ]
-    then
-        PATH="$PATH:$1"
-    fi
-}
-
 function source_if_exists {
     if [ -f $1 ]
     then
@@ -154,10 +148,6 @@ function source_if_exists {
 }
 
 prepend_path_if_exists "/usr/local/sbin"
-
-# configure legacy node
-append_path_if_exists "/usr/local/opt/node@10/bin"
-prepend_path_if_exists "~/.gem/ruby/2.6.0/bin"
 
 # source nexus credentials
 if [ -f ~/.nexus ]
@@ -178,5 +168,3 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
-# I will migrate to zsh one day, i promise
-export BASH_SILENCE_DEPRECATION_WARNING=1
