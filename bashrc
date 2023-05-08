@@ -1,16 +1,17 @@
 # .bashrc
 
+bash_shell="/bin/bash"
+curr_shell="$(echo $0)"
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [ -f /etc/bashrc  -a $curr_shell = $bash_shell ]; then
 	. /etc/bashrc
 fi
 
 # User specific aliases and functions
 # setup git-completion
 GIT_COMPLETION_CONFIG="$HOME/.git-completion"
-if [ -f $GIT_COMPLETION_CONFIG ]
-then
+if [ -f $GIT_COMPLETION_CONFIG  -a $curr_shell = $bash_shell ]; then
     source $GIT_COMPLETION_CONFIG
 fi
 
@@ -41,22 +42,18 @@ alias merge="git fetch && git merge ${1:-origin/develop}"
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux" # specifically for 256color compat in tmux + iterm
 
-# insta aliases
-if [ -f /usr/local/opt/insta/bin/insta ]; then
-    alias iup='insta start'
-    alias idown='insta stop'
-    alias ipg='insta workspace'
-    alias ipem='insta pem'
-    alias ig='insta gemini'
-    alias issh='insta ssh'
-    alias iscp='insta scp'
-fi
-
 # misc aliases
 alias info='info --vi-keys'
-if [ -f ~/bin/find-gradle ]
-then
+if [ -f ~/bin/find-gradle ]; then
     alias gw='find-gradle'
+fi
+
+# add certificates in various places
+if [ -f ~/.trusted-certs ]; then
+    if [ -f ~/.trusted-certs/PalantirThirdGenRootCA-selfsign.pem ]; then
+        # for intellij
+        export NODE_EXTRA_CA_CERTS=~/.trusted-certs/PalantirThirdGenRootCA-selfsign.pem
+    fi
 fi
 
 which gpgconf >/dev/null
@@ -72,77 +69,63 @@ if [ -d $CUSTOM_GIT_VOLUME ]; then
     export GRADLECACHE_BACKUP_HOME="$CUSTOM_GIT_VOLUME/.gradlecache-backups"
 fi
 
-BREW_PREFIX=$(brew --prefix 2>/dev/null)
-if [ -d "$BREW_PREFIX" ]
-then
-    # configure bash-git-prompt
-    if [ -f "$BREW_PREFIX/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-        __GIT_PROMPT_DIR="$BREW_PREFIX/opt/bash-git-prompt/share"
-        GIT_PRMOPT_FETCH_REMOTE_STATUS=0
-        GIT_PRMOPT_ONLY_IN_REPO=1
-        GIT_PROMPT_THEME="Minimal_UserHost"
-        source "$BREW_PREFIX/opt/bash-git-prompt/share/gitprompt.sh"
-    fi
-fi
-
-# configure non-brew bash-git-prompt
-BASH_GIT_PROMPT_HOME=${BASH_GIT_PROMPT_HOME:-${HOME}/.bash-git-prompt}
-if [ -f "${BASH_GIT_PROMPT_HOME}/gitprompt.sh" ]; then
-    GIT_PROMPT_ONLY_IN_REPO=1
-    source ${BASH_GIT_PROMPT_HOME}/gitprompt.sh
-fi
-
 # configure rvm
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]
-then
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
     export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
     source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
 # configure iterm2 shell integration
-if [ -e "${HOME}/.iterm2_shell_integration.bash" ]
-then
+if [ -e "${HOME}/.iterm2_shell_integration.bash" -a $curr_shell = $bash_shell ]; then
     source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
 # configure rbenv
-if [ -d "$BREW_PREFIX/opt/rbenv" ]
-then
+if [ -d "$BREW_PREFIX/opt/rbenv" ]; then
     eval "$(rbenv init -)"
 fi
 
-#DESIRED_JAVA_VERSION="1.8"
-DESIRED_JAVA_VERSION=11
 OSX_JAVA_HOME_BIN=/usr/libexec/java_home
-if [ -f $OSX_JAVA_HOME_BIN ]
-then
+if [ -f $OSX_JAVA_HOME_BIN ]; then
     JAVA_8_HOME=$($OSX_JAVA_HOME_BIN -v 1.8)
-    if [ -d "$JAVA_8_HOME" ]
-    then
-        export JAVA_8_HOME
-    fi
-    JAVA_HOME=$($OSX_JAVA_HOME_BIN -v $DESIRED_JAVA_VERSION)
-    if [ -d "$JAVA_HOME" ]
-    then
-        export JAVA_HOME
-    fi
+    JAVA_11_HOME=$($OSX_JAVA_HOME_BIN -v 11)
 fi
 
+function get_corretto_jdk_home {
+    echo "/Library/Java/JavaVirtualMachines/amazon-corretto-$1.jdk/Contents/Home"
+}
+
+if [ -d "$(get_corretto_jdk_home 8)" ]; then
+    export JAVA_8_HOME="$(get_corretto_jdk_home 8)"
+fi
+
+if [ -d "$(get_corretto_jdk_home 11)" ]; then
+    export JAVA_11_HOME="$(get_corretto_jdk_home 11)"
+fi
+
+if [ -d "$(get_corretto_jdk_home 17)" ]; then
+    export JAVA_17_HOME="$(get_corretto_jdk_home 17)"
+fi
+
+if [ -d "$(get_corretto_jdk_home 19)" ]; then
+    export JAVA_19_HOME="$(get_corretto_jdk_home 19)"
+fi
+
+export JAVA_HOME=$JAVA_11_HOME
+
 # set display variable in coder environments
-if [ "$(whoami)" == "coder" ]; then
+if [ "$(whoami)" = "coder" ]; then
     export DISPLAY=:90
 fi
 
 function prepend_path_if_exists {
-    if [ -d $1 ]
-    then
+    if [ -d $1 ]; then
         PATH="$1:$PATH"
     fi
 }
 
 function source_if_exists {
-    if [ -f $1 ]
-    then
+    if [ -f $1 ]; then
         source $1
     fi
 }
@@ -150,8 +133,7 @@ function source_if_exists {
 prepend_path_if_exists "/usr/local/sbin"
 
 # source nexus credentials
-if [ -f ~/.nexus ]
-then
+if [ -f ~/.nexus ]; then
     source ~/.nexus
 fi
 
