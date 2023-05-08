@@ -150,3 +150,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
+if [ -f /usr/local/bin/spark-submit ]; then
+    SPARK_LOCAL_IP="127.0.0.1"
+fi
+
