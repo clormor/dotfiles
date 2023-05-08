@@ -156,6 +156,8 @@ export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
 if [ -f $HOMEBREW_PREFIX/bin/spark-submit ]; then
-    SPARK_LOCAL_IP="127.0.0.1"
+    export SPARK_LOCAL_IP="127.0.0.1"
+    export SPARK_HOME="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 | sort -V | head -n 1)/libexec"
 fi
+prepend_path_if_exists "$SPARK_HOME/bin"
 
