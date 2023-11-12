@@ -81,7 +81,7 @@ if [ -e "${HOME}/.iterm2_shell_integration.bash" -a $curr_shell = $bash_shell ];
 fi
 
 # configure rbenv
-if [ -d "$BREW_PREFIX/opt/rbenv" ]; then
+if [ -d "$HOMEBREW_PREFIX/opt/rbenv" ]; then
     eval "$(rbenv init -)"
 fi
 
@@ -130,6 +130,11 @@ function source_if_exists {
     fi
 }
 
+# configure homebrew
+if [ -d "$HOMEBREW_PREFIX" ]; then
+    prepend_path_if_exists "$HOMEBREW_PREFIX/bin"
+fi
+
 prepend_path_if_exists "/usr/local/sbin"
 
 # source nexus credentials
@@ -150,7 +155,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
-if [ -f /usr/local/bin/spark-submit ]; then
+if [ -f $HOMEBREW_PREFIX/bin/spark-submit ]; then
     SPARK_LOCAL_IP="127.0.0.1"
 fi
 

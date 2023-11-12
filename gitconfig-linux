@@ -5,9 +5,9 @@
 [difftool]
     prompt = false
 [difftool "diffmerge"]
-    cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+    cmd = \"$HOMEBREW_PREFIX\"/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
     tool = diffmerge
 [mergetool "diffmerge"]
     trustExitCode = false
-    cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = \"$HOMEBREW_PREFIX\"/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
