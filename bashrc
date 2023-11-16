@@ -26,6 +26,11 @@ alias ls='ls --color=auto'
 alias ll='ls -lFG'
 alias la='ls -A'
 
+# use python3 if its on the path
+#if [ "$(which python3)" != "" ]; then
+#    alias python='python3'
+#fi
+
 # use gnu-tar
 if [ "$(which gtar)" != "" ]; then
     alias tar='gtar'
