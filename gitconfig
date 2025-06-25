@@ -20,6 +20,7 @@
     path = ~/.gitconfig-osx
 [includeIf "gitdir:/Volumes/git/"]
     path = ~/.gitconfig-osx
+    path = ~/.gitconfig-gpg
 [core]
     autocrlf = input
     editor = vim
