@@ -50,3 +50,6 @@
     required = true
 [init]
     defaultBranch = develop
+[user]
+	email = clormor@palantir.com
+	name = clormor
