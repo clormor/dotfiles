@@ -6,8 +6,3 @@
     prompt = false
 [difftool "diffmerge"]
     cmd = \"$HOMEBREW_PREFIX\"/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
-[merge]
-    tool = diffmerge
-[mergetool "diffmerge"]
-    trustExitCode = false
-    cmd = \"$HOMEBREW_PREFIX\"/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"

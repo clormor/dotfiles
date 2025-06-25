@@ -56,3 +56,7 @@
 [user]
 	email = clormor@palantir.com
 	name = clormor
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
