@@ -18,6 +18,8 @@
     path = ~/.gitconfig-win
 [includeIf "gitdir:/Users/"]
     path = ~/.gitconfig-osx
+[includeIf "gitdir:/Volumes/git/"]
+    path = ~/.gitconfig-osx
 [core]
     autocrlf = input
     editor = vim
