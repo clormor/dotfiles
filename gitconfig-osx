@@ -1,5 +1,7 @@
 [user]
-    signingkey = E63C726C5E12BC87038BDC32C64E954B815F4E5D
+    signingkey = 3DC422574CEE2944
+[gpg]
+    program = gpg
 [diff]
     tool = diffmerge
 [difftool]

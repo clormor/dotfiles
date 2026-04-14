@@ -1,24 +1,10 @@
 [includeIf "gitdir:**/coder/dotfiles/"]
     path = ~/.gitconfig-work
-[includeIf "gitdir:**/pbin/"]
-    path = ~/.gitconfig-work
 [includeIf "gitdir:work/"]
     path = ~/.gitconfig-work
-    path = ~/.gitconfig-gpg
-[includeIf "gitdir:**/bin/"]
-    path = ~/.gitconfig-personal
 [includeIf "gitdir:personal/"]
     path = ~/.gitconfig-personal
-    path = ~/.gitconfig-gpg
-[includeIf "gitdir:**/git/"]
-    path = ~/.gitconfig-osx
-[includeIf "gitdir:**/coder/"]
-    path = ~/.gitconfig-linux
-[includeIf "gitdir:**/GitHub/"]
-    path = ~/.gitconfig-win
 [includeIf "gitdir:/Users/"]
-    path = ~/.gitconfig-osx
-[includeIf "gitdir:/Volumes/git/"]
     path = ~/.gitconfig-osx
     path = ~/.gitconfig-gpg
 [core]
@@ -54,8 +40,8 @@
 [init]
     defaultBranch = develop
 [user]
-	email = clormor@palantir.com
-	name = clormor
+	email = chris@valliance.ai
+	name = chris
 [merge]
 	tool = vscode
 [mergetool "vscode"]

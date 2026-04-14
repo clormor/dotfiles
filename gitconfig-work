@@ -1,5 +1,5 @@
 [user]
-    email = clormor@palantir.com
+    email = chris@valliance.ai
     name = Chris Lormor
 [url "git@github.palantir.build:"]
 	insteadof = https://github.palantir.build/

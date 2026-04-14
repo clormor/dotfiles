@@ -90,10 +90,9 @@ if [ -d "$HOMEBREW_PREFIX/opt/rbenv" ]; then
     eval "$(rbenv init -)"
 fi
 
-OSX_JAVA_HOME_BIN=/usr/libexec/java_home
-if [ -f $OSX_JAVA_HOME_BIN ]; then
-    JAVA_8_HOME=$($OSX_JAVA_HOME_BIN -v 1.8)
-    JAVA_11_HOME=$($OSX_JAVA_HOME_BIN -v 11)
+if [ -f /usr/libexec/java_home ]; then
+    JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8 2>/dev/null) || unset JAVA_8_HOME
+    JAVA_11_HOME=$(/usr/libexec/java_home -v 11 2>/dev/null) || unset JAVA_11_HOME
 fi
 
 function get_corretto_jdk_home {
@@ -165,4 +164,8 @@ if [ -f $HOMEBREW_PREFIX/bin/spark-submit ]; then
     export SPARK_HOME="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 | sort -V | head -n 1)/libexec"
 fi
 prepend_path_if_exists "$SPARK_HOME/bin"
+prepend_path_if_exists "$HOME/.codeium/windsurf/bin"
+prepend_path_if_exists "$HOME/.local/bin"
+
+source_if_exists "$HOME/.git-prompt.sh"
 

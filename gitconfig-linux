@@ -1,8 +1,0 @@
-[user]
-    signingkey = E63C726C5E12BC87038BDC32C64E954B815F4E5D
-[diff]
-    tool = diffmerge
-[difftool]
-    prompt = false
-[difftool "diffmerge"]
-    cmd = \"$HOMEBREW_PREFIX\"/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
