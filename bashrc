@@ -163,6 +163,7 @@ if [ -f $HOMEBREW_PREFIX/bin/spark-submit ]; then
     export SPARK_LOCAL_IP="127.0.0.1"
     export SPARK_HOME="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 | sort -V | head -n 1)/libexec"
 fi
+
 prepend_path_if_exists "$SPARK_HOME/bin"
 prepend_path_if_exists "$HOME/.codeium/windsurf/bin"
 prepend_path_if_exists "$HOME/.local/bin"
