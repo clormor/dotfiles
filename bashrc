@@ -169,3 +169,6 @@ prepend_path_if_exists "$HOME/.local/bin"
 
 source_if_exists "$HOME/.git-prompt.sh"
 
+# Tell GPG what terminal to use for passphrase prompts
+export GPG_TTY=$(tty)
+
