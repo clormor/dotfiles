@@ -149,7 +149,6 @@ fi
 # add custom scripts to PATH
 prepend_path_if_exists "$HOME/bin"
 prepend_path_if_exists "$HOME/pbin"
-
 source_if_exists "$HOME/pbin/.profile"
 
 # configure environment variables
