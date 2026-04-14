@@ -2,8 +2,6 @@
     path = ~/.gitconfig-work
 [includeIf "gitdir:work/"]
     path = ~/.gitconfig-work
-[includeIf "gitdir:personal/"]
-    path = ~/.gitconfig-personal
 [includeIf "gitdir:/Users/"]
     path = ~/.gitconfig-osx
     path = ~/.gitconfig-gpg
@@ -40,8 +38,8 @@
 [init]
     defaultBranch = develop
 [user]
-	email = chris@valliance.ai
-	name = chris
+	email = 3955231+clormor@users.noreply.github.com
+	name = Chris Lormor
 [merge]
 	tool = vscode
 [mergetool "vscode"]
