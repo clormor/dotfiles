@@ -115,7 +115,9 @@ if [ -d "$(get_corretto_jdk_home 19)" ]; then
     export JAVA_19_HOME="$(get_corretto_jdk_home 19)"
 fi
 
-export JAVA_HOME=$JAVA_11_HOME
+if [ -n "$JAVA_11_HOME" ]; then
+    export JAVA_HOME="$JAVA_11_HOME"
+fi
 
 # set display variable in coder environments
 if [ "$(whoami)" = "coder" ]; then
@@ -158,12 +160,16 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
-if [ -f $HOMEBREW_PREFIX/bin/spark-submit ]; then
+if [ -f "$HOMEBREW_PREFIX/bin/spark-submit" ]; then
     export SPARK_LOCAL_IP="127.0.0.1"
-    export SPARK_HOME="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 | sort -V | head -n 1)/libexec"
+    _spark_base="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 2>/dev/null | sort -V | head -n 1)"
+    if [ -n "$_spark_base" ]; then
+        export SPARK_HOME="$_spark_base/libexec"
+        prepend_path_if_exists "$SPARK_HOME/bin"
+    fi
+    unset _spark_base
 fi
 
-prepend_path_if_exists "$SPARK_HOME/bin"
 prepend_path_if_exists "$HOME/.codeium/windsurf/bin"
 prepend_path_if_exists "$HOME/.local/bin"
 
