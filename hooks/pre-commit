@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Blocks commits that stage files commonly used to store secrets.
+
+PROTECTED=(
+    .tokens
+    .env
+    .env.local
+    .env.secret
+    .env.production
+    .secrets
+    .netrc
+    .nexus
+)
+
+staged=$(git diff --cached --name-only)
+
+for f in "${PROTECTED[@]}"; do
+    if echo "$staged" | grep -qE "(^|/)${f}$"; then
+        echo "ERROR: Refusing to commit '$f' — this file may contain secrets."
+        echo "Remove it from the index with: git reset HEAD '$f'"
+        exit 1
+    fi
+done
