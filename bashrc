@@ -148,6 +148,9 @@ if [ -f ~/.nexus ]; then
     source ~/.nexus
 fi
 
+# source tokens/secrets (never commit this file)
+source_if_exists "$HOME/.tokens"
+
 # add custom scripts to PATH
 prepend_path_if_exists "$HOME/bin"
 prepend_path_if_exists "$HOME/pbin"

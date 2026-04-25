@@ -1,0 +1,23 @@
+#!/bin/bash
+# Prevent accidental commits of sensitive files.
+
+BLOCKED=(
+    ".tokens"
+    ".env"
+    ".env.local"
+    ".env.secret"
+    ".env.production"
+    ".secrets"
+    ".netrc"
+    ".nexus"
+)
+
+STAGED=$(git diff --cached --name-only)
+
+for pattern in "${BLOCKED[@]}"; do
+    if echo "$STAGED" | grep -qE "(^|/)${pattern}$"; then
+        echo "ERROR: Refusing to commit file matching sensitive pattern: $pattern"
+        echo "       Remove it from staging with: git reset HEAD <file>"
+        exit 1
+    fi
+done
