@@ -15,3 +15,8 @@ for FILE in `ls $DOTFILES`; do
     ln -sf "$SOURCE" "$DEST"
 done
 
+# Ensure git hook scripts are executable
+if [ -d "$HOME/.hooks" ]; then
+    chmod +x "$HOME/.hooks"/*
+fi
+

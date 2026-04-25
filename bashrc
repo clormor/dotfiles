@@ -178,3 +178,6 @@ source_if_exists "$HOME/.git-prompt.sh"
 # Tell GPG what terminal to use for passphrase prompts
 export GPG_TTY=$(tty)
 
+# source tokens and secrets (file should never be committed to source control)
+source_if_exists "$HOME/.tokens"
+

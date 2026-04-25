@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Pre-commit hook: prevent accidental commits of secret files and credentials.
+# Installed globally via core.hooksPath in ~/.gitconfig.
+
+BLOCKED_FILES=(
+    ".tokens"
+    ".env"
+    ".env.local"
+    ".env.secret"
+    ".env.production"
+    ".secrets"
+    ".netrc"
+    ".nexus"
+)
+
+FAILED=0
+
+staged_files=$(git diff --cached --name-only)
+for blocked in "${BLOCKED_FILES[@]}"; do
+    if echo "$staged_files" | grep -qE "(^|/)${blocked}$"; then
+        echo "ERROR: Refusing to commit secret file: ${blocked}" >&2
+        FAILED=1
+    fi
+done
+
+if [ "$FAILED" -eq 1 ]; then
+    echo "" >&2
+    echo "Commit blocked to prevent accidental secret exposure." >&2
+    echo "To bypass (use with extreme caution): git commit --no-verify" >&2
+    exit 1
+fi

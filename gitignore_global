@@ -6,3 +6,13 @@
 .project
 .settings/
 
+# Secret and credential files — should never be committed
+.tokens
+.env
+.env.local
+.env.secret
+.env.production
+.secrets
+.netrc
+.nexus
+
