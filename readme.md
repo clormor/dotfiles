@@ -11,17 +11,17 @@ git clone git@github.com:clormor/dotfiles.git && cd dotfiles
 
 ## Files
 
-| File | Symlinked to | Description |
-|------|-------------|-------------|
-| `bash_profile` | `~/.bash_profile` | Bash login shell entry point |
-| `bashrc` | `~/.bashrc` | Shell aliases, PATH setup, Java/Ruby/Python tooling, GPG, Homebrew |
-| `brewfile` | `~/.brewfile` | Homebrew bundle — run `brew bundle --global` to install packages |
-| `gitconfig` | `~/.gitconfig` | Git settings; conditionally includes work and macOS profiles |
-| `gitconfig-gpg` | `~/.gitconfig-gpg` | GPG commit-signing configuration |
-| `gitconfig-osx` | `~/.gitconfig-osx` | macOS-specific Git settings |
-| `gitconfig-work` | `~/.gitconfig-work` | Work identity and settings |
-| `gitignore_global` | `~/.gitignore_global` | Global gitignore patterns |
-| `mkshrc` | `~/.mkshrc` | MKsh shell configuration |
-| `vimrc` | `~/.vimrc` | Vim settings, key mappings, LaTeX and Markdown support |
-| `zprofile` | `~/.zprofile` | Zsh login profile |
-| `zshrc` | `~/.zshrc` | Zsh config — sources `.bashrc`, adds direnv, nvm, Ruby |
+| File | Symlinked to |
+|------|-------------|
+| `bash_profile` | `~/.bash_profile` |
+| `bashrc` | `~/.bashrc` |
+| `brewfile` | `~/.brewfile` |
+| `gitconfig` | `~/.gitconfig` |
+| `gitconfig-gpg` | `~/.gitconfig-gpg` |
+| `gitconfig-osx` | `~/.gitconfig-osx` |
+| `gitconfig-work` | `~/.gitconfig-work` |
+| `gitignore_global` | `~/.gitignore_global` |
+| `mkshrc` | `~/.mkshrc` |
+| `vimrc` | `~/.vimrc` |
+| `zprofile` | `~/.zprofile` |
+| `zshrc` | `~/.zshrc` |
