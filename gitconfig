@@ -9,7 +9,6 @@
     autocrlf = input
     editor = vim
     excludesfile = ~/.gitignore_global
-    hooksPath = ~/.hooks
     ignorecase = true
     longpaths = true
     whitespace = trailing-space,space-before-tab
