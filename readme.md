@@ -10,12 +10,12 @@ git clone git@github.com:clormor/dotfiles.git && cd dotfiles
 ```
 
 `setup.sh` does the following:
-1. Symlinks every file in this repo into `$HOME` as a dotfile (e.g. `bashrc` → `~/.bashrc`). Any existing file is first backed up as `.orig`.
-2. Symlinks `hooks/` to `~/.hooks` and marks all hook scripts executable.
+1. Symlinks every file in this repo into `$HOME` as a dotfile (e.g. `bashrc` → `~/.bashrc`).
+2. Any existing file is first backed up as `.orig`.
 
 ## Managing tokens and secrets
 
-Secrets (API keys, tokens, passwords) should never be committed to source control. This repo provides three layers of protection.
+Secrets (API keys, tokens, passwords) should never be committed to source control.
 
 Store exported environment variables in `~/.tokens`:
 
