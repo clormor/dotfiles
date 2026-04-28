@@ -13,29 +13,9 @@ git clone git@github.com:clormor/dotfiles.git && cd dotfiles
 1. Symlinks every file in this repo into `$HOME` as a dotfile (e.g. `bashrc` → `~/.bashrc`). Any existing file is first backed up as `.orig`.
 2. Symlinks `hooks/` to `~/.hooks` and marks all hook scripts executable.
 
-## Files
-
-| File | Symlinked to |
-|------|-------------|
-| `bash_profile` | `~/.bash_profile` |
-| `bashrc` | `~/.bashrc` |
-| `brewfile` | `~/.brewfile` |
-| `gitconfig` | `~/.gitconfig` |
-| `gitconfig-gpg` | `~/.gitconfig-gpg` |
-| `gitconfig-osx` | `~/.gitconfig-osx` |
-| `gitconfig-work` | `~/.gitconfig-work` |
-| `gitignore_global` | `~/.gitignore_global` |
-| `hooks/` | `~/.hooks/` |
-| `mkshrc` | `~/.mkshrc` |
-| `vimrc` | `~/.vimrc` |
-| `zprofile` | `~/.zprofile` |
-| `zshrc` | `~/.zshrc` |
-
 ## Managing tokens and secrets
 
 Secrets (API keys, tokens, passwords) should never be committed to source control. This repo provides three layers of protection.
-
-### Layer 1 — `~/.tokens`
 
 Store exported environment variables in `~/.tokens`:
 
@@ -51,25 +31,5 @@ export AWS_SECRET_ACCESS_KEY=...
 source_if_exists "$HOME/.tokens"
 ```
 
-`~/.tokens` is listed in `gitignore_global` so it can never be accidentally staged.
-
-### Layer 2 — global gitignore
-
-`gitignore_global` (symlinked to `~/.gitignore_global` and referenced by `gitconfig`) prevents the following filenames from being staged in **any** repo on your machine:
-
-```
-.tokens  .env  .env.local  .env.secret  .env.production  .secrets  .netrc  .nexus
-```
-
-### Layer 3 — global pre-commit hook
-
-`hooks/pre-commit` (symlinked to `~/.hooks/pre-commit`) runs before every commit across all repos. It refuses the commit if any of the protected filenames above are staged, printing a clear error and the command to unstage the file.
-
-`gitconfig` tells git to use `~/.hooks` as the global hooks directory:
-
-```ini
-[core]
-    hooksPath = ~/.hooks
-```
-
 No manual install step is needed — `setup.sh` handles everything.
+

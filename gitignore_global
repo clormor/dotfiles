@@ -8,11 +8,7 @@
 
 # secret files — never commit these
 .tokens
-.env
-.env.local
-.env.secret
-.env.production
-.secrets
 .netrc
-.nexus
+netrc
+tokens
 
