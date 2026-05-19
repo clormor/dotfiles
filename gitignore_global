@@ -12,3 +12,7 @@
 netrc
 tokens
 
+# Claude Code local overrides and logs
+settings.local.json
+tool-usage.log
+
