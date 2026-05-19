@@ -158,13 +158,21 @@ export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
-prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
+prepend_path_if_exists "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin/"
 
-# highlight broken symlinks (and their missing targets) in bold red when
-# listing files. Requires GNU ls/dircolors (Homebrew coreutils on macOS).
+# highlight symlinks with colours suited to the active macOS appearance.
+# dark mode: bold cyan (01;36) for valid, bold red (01;31) for broken.
+# light mode: normal blue (00;34) for valid, bold red (01;31) for broken.
+# Requires GNU ls/dircolors (Homebrew coreutils on macOS).
 if command -v dircolors >/dev/null 2>&1; then
     eval "$(dircolors -b)"
-    LS_COLORS="${LS_COLORS}:or=01;31:mi=01;31"
+    if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
+        _ln_color="01;36"
+    else
+        _ln_color="00;34"
+    fi
+    LS_COLORS="${LS_COLORS}:ln=${_ln_color}:or=01;31:mi=01;31"
+    unset _ln_color
     export LS_COLORS
 fi
 
