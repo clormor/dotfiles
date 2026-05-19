@@ -1,10 +1,7 @@
-[includeIf "gitdir:**/coder/dotfiles/"]
-    path = ~/.gitconfig-work
-[includeIf "gitdir:work/"]
-    path = ~/.gitconfig-work
 [includeIf "gitdir:/Users/"]
     path = ~/.gitconfig-osx
-    path = ~/.gitconfig-gpg
+[includeIf "gitdir:**/valliance-foundry/**"]
+    path = ~/.gitconfig-valliance-foundry
 [core]
     autocrlf = input
     editor = vim
@@ -36,7 +33,7 @@
     process = git-lfs filter-process
     required = true
 [init]
-    defaultBranch = develop
+    defaultBranch = main
 [user]
 	email = 3955231+clormor@users.noreply.github.com
 	name = Chris Lormor
@@ -44,5 +41,9 @@
 	tool = vscode
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
-[includeIf "gitdir:**/valliance-foundry/**"]
-    path = ~/.gitconfig-foundry
+[commit]
+	gpgsign = true
+[gpg]
+    program = gpg
+[tag]
+	gpgsign = false
