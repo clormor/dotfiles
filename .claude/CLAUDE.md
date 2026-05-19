@@ -33,6 +33,8 @@ Files at the repo root are stored without the leading dot. `setup.sh` prepends i
 ## Gotchas
 
 - **includeIf ordering**: Git uses the last value for a key. Any `includeIf` directive that overrides a default (e.g. `user.email`) must appear *after* the section containing that default in `gitconfig`. Placing it before means the default wins.
+- **Skill permissions go in allowed-tools frontmatter**: When a skill needs specific tool permissions, declare them in the SKILL.md `allowed-tools` frontmatter field — not in `~/.claude/settings.json`. Global settings should only be widened for permissions that apply everywhere.
+- **Never interpolate secrets into Bash commands**: The `pre-tool-log.sh` hook logs every Bash tool call before execution. Any secret value interpolated into a command string ends up in the log. For any task involving secrets, construct the command with non-secret parameters filled in and tell the user to run it with `!` so the value is entered directly in the terminal.
 
 ## GitHub Actions
 
