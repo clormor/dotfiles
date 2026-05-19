@@ -1,0 +1,4 @@
+# Claude Code — local/ephemeral files that must not be committed
+.claude/tool-usage.log
+.claude/settings.local.json
+.claude/todos/
