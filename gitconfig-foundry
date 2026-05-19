@@ -1,0 +1,5 @@
+[user]
+    # Foundry user ID for the Valliance Foundry instance
+    email = 265e0633-7ffc-44c5-81d0-abd203d24e9f
+[commit]
+    gpgsign = false

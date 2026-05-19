@@ -30,6 +30,10 @@ Files at the repo root are stored without the leading dot. `setup.sh` prepends i
 - `~/.gitconfig-work` applies for repos under `work/` or the Coder remote path.
 - GPG commit signing (`gpgsign = true`) is enabled via `gitconfig-gpg` on macOS. The signing key is defined in `gitconfig-osx`.
 
+## Gotchas
+
+- **includeIf ordering**: Git uses the last value for a key. Any `includeIf` directive that overrides a default (e.g. `user.email`) must appear *after* the section containing that default in `gitconfig`. Placing it before means the default wins.
+
 ## GitHub Actions
 
 Two workflows run on PRs:
