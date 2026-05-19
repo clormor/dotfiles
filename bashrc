@@ -160,6 +160,14 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "/usr/local/opt/coreutils/libexec/gnubin/"
 
+# highlight broken symlinks (and their missing targets) in bold red when
+# listing files. Requires GNU ls/dircolors (Homebrew coreutils on macOS).
+if command -v dircolors >/dev/null 2>&1; then
+    eval "$(dircolors -b)"
+    LS_COLORS="${LS_COLORS}:or=01;31:mi=01;31"
+    export LS_COLORS
+fi
+
 if [ -f "$HOMEBREW_PREFIX/bin/spark-submit" ]; then
     export SPARK_LOCAL_IP="127.0.0.1"
     _spark_base="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 2>/dev/null | sort -V | head -n 1)"
