@@ -25,3 +25,7 @@ if [[ -d "$HOME/.nvm" ]]; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+if command -v mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
