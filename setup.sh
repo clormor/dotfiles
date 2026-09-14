@@ -12,10 +12,22 @@ for FILE in `ls $DOTFILES`; do
     fi
     SOURCE="$DOTFILES/$FILE"
     DEST="$HOME/.$( basename $FILE )"
-    if [ -e "$DEST" ]; then
+    if [ -e "$DEST" ] && [ "$( readlink "$DEST" )" != "$SOURCE" ]; then
         mv "$DEST" "$DEST.orig"
     fi
     echo "Linking $SOURCE -> $DEST"
     ln -sf "$SOURCE" "$DEST"
 done
 
+echo "Checking for dangling dotfile symlinks in $HOME"
+for LINK in "$HOME"/.*; do
+    [ -L "$LINK" ] || continue
+    [ -e "$LINK" ] && continue
+    TARGET=$( readlink "$LINK" )
+    case "$TARGET" in
+        "$DOTFILES"/*) ;;
+        *) continue ;;
+    esac
+    echo "Dangling: $LINK -> $TARGET"
+    rm -i "$LINK"
+done
