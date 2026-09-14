@@ -1,0 +1,18 @@
+[user]
+    # Foundry user ID for the Valliance Foundry instance
+    # https://valliance.palantirfoundry.com/workspace/settings/account
+    email = 265e0633-7ffc-44c5-81d0-abd203d24e9f
+[commit]
+    gpgsign = false
+[credential "https://valliance.palantirfoundry.com"]
+    # Stemma clone URLs arrive with a short-lived token baked into the remote.
+    # That token expires and git has no way to refresh it, so strip it from the
+    # remote URL and let this helper supply the current FOUNDRY_TOKEN instead.
+    # https://valliance.palantirfoundry.com/workspace/settings/tokens
+    #
+    # Empty value first: resets the inherited helper list for this host so the
+    # keychain cannot serve a stale token ahead of the live FOUNDRY_TOKEN.
+    helper =
+    helper = "!f() { test \"$1\" = get || return 0; if [ -z \"$FOUNDRY_TOKEN\" ]; then echo 'git: FOUNDRY_TOKEN is not set. Export a Foundry token before running git against valliance.palantirfoundry.com.' >&2; return 0; fi; echo 'username=chris@valliance.ai'; echo \"password=$FOUNDRY_TOKEN\"; }; f"
+    # One token covers every repo on the host, so ignore the path when matching.
+    useHttpPath = false

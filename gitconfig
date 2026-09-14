@@ -45,5 +45,5 @@
 	gpgsign = false
 [includeIf "gitdir:/Users/"]
     path = ~/.gitconfig-osx
-[includeIf "gitdir:**/valliance-foundry/**"]
-    path = ~/.gitconfig-valliance-foundry
+[includeIf "gitdir:**/foundry-valliance/**"]
+    path = ~/.gitconfig-foundry-valliance

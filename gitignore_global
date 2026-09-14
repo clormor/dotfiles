@@ -16,3 +16,5 @@ tokens
 settings.local.json
 tool-usage.log
 
+
+**/.claude/settings.local.json
