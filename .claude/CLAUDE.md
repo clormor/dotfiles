@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Personal dotfiles for a macOS/Linux development environment. `setup.sh` symlinks every file at the repo root into `$HOME` as a hidden file (e.g. `bashrc` → `~/.bashrc`). Files named `readme.md` and `setup.sh` are skipped. Any existing destination file is backed up with an `.orig` suffix before being replaced. After linking, it prunes dangling symlinks in `$HOME` that point back into the repo (left behind by renames or deletions), prompting per file with `rm -i`. Broken symlinks pointing anywhere else are left alone.
+Personal dotfiles for a macOS/Linux development environment. `setup.sh` symlinks every file at the repo root into `$HOME` as a hidden file (e.g. `bashrc` → `~/.bashrc`). Files named `readme.md` and `setup.sh` are skipped. Any existing destination file is replaced. After linking, it prunes dangling symlinks in `$HOME` whose target sits in a directory named after this repo, prompting per file with `rm -i`. Matching on the directory name rather than the full repo path means links left by an earlier clone location are pruned too. Broken symlinks pointing anywhere else are left alone.
 
 ## Applying changes
 
