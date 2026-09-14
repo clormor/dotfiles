@@ -38,9 +38,8 @@ Files at the repo root are stored without the leading dot. `setup.sh` prepends i
 
 ## GitHub Actions
 
-Two workflows run on PRs:
+One workflow runs on PRs:
 
 - `claude.yml` — responds to `@claude` mentions in issues and PR comments using `anthropics/claude-code-action`. Commits are SSH-signed via `CLAUDE_SSH_SIGNING_KEY`.
-- `claude-code-review.yml` — runs an automated `/code-review` on every PR open/sync using the `code-review` plugin.
 
-Both require `ANTHROPIC_API_KEY` to be set as a repository secret.
+It requires `ANTHROPIC_API_KEY` to be set as a repository secret.
