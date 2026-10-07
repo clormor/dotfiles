@@ -72,54 +72,21 @@ if [ -d $CUSTOM_GIT_VOLUME ]; then
     export GRADLECACHE_BACKUP_HOME="$CUSTOM_GIT_VOLUME/.gradlecache-backups"
 fi
 
-# configure rvm
-if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-fi
-
 # configure iterm2 shell integration
 if [ -e "${HOME}/.iterm2_shell_integration.bash" -a $curr_shell = $bash_shell ]; then
     source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
-# configure rbenv
-if [ -d "$HOMEBREW_PREFIX/opt/rbenv" ]; then
-    eval "$(rbenv init -)"
-fi
-
-if [ -f /usr/libexec/java_home ]; then
-    JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8 2>/dev/null) || unset JAVA_8_HOME
-    JAVA_11_HOME=$(/usr/libexec/java_home -v 11 2>/dev/null) || unset JAVA_11_HOME
-fi
-
-function get_corretto_jdk_home {
-    echo "/Library/Java/JavaVirtualMachines/amazon-corretto-$1.jdk/Contents/Home"
-}
-
-if [ -d "$(get_corretto_jdk_home 8)" ]; then
-    export JAVA_8_HOME="$(get_corretto_jdk_home 8)"
-fi
-
-if [ -d "$(get_corretto_jdk_home 11)" ]; then
-    export JAVA_11_HOME="$(get_corretto_jdk_home 11)"
-fi
-
-if [ -d "$(get_corretto_jdk_home 17)" ]; then
-    export JAVA_17_HOME="$(get_corretto_jdk_home 17)"
-fi
-
-if [ -d "$(get_corretto_jdk_home 19)" ]; then
-    export JAVA_19_HOME="$(get_corretto_jdk_home 19)"
-fi
+for _jdk_version in 8 11 17 19; do
+    _jdk_home="/Library/Java/JavaVirtualMachines/amazon-corretto-$_jdk_version.jdk/Contents/Home"
+    if [ -d "$_jdk_home" ]; then
+        export "JAVA_${_jdk_version}_HOME=$_jdk_home"
+    fi
+done
+unset _jdk_version _jdk_home
 
 if [ -n "$JAVA_11_HOME" ]; then
     export JAVA_HOME="$JAVA_11_HOME"
-fi
-
-# set display variable in coder environments
-if [ "$(whoami)" = "coder" ]; then
-    export DISPLAY=:90
 fi
 
 function prepend_path_if_exists {
@@ -154,8 +121,6 @@ source_if_exists "$HOME/pbin/.profile"
 # configure environment variables
 export ARTIFACTORY_URL=https://artifactory.palantir.build/artifactory
 export HOMEBREW_EDITOR=/usr/bin/vim
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export PIPENV_DEFAULT_PYTHON_VERSION=3.7
 prepend_path_if_exists "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin/"
 
 # highlight symlinks with colours suited to the active macOS appearance.
@@ -172,16 +137,6 @@ if command -v dircolors >/dev/null 2>&1; then
     LS_COLORS="${LS_COLORS}:ln=${_ln_color}:or=01;31:mi=01;31"
     unset _ln_color
     export LS_COLORS
-fi
-
-if [ -f "$HOMEBREW_PREFIX/bin/spark-submit" ]; then
-    export SPARK_LOCAL_IP="127.0.0.1"
-    _spark_base="$(find /usr/local/Cellar/apache-spark -maxdepth 1 -mindepth 1 2>/dev/null | sort -V | head -n 1)"
-    if [ -n "$_spark_base" ]; then
-        export SPARK_HOME="$_spark_base/libexec"
-        prepend_path_if_exists "$SPARK_HOME/bin"
-    fi
-    unset _spark_base
 fi
 
 prepend_path_if_exists "$HOME/.codeium/windsurf/bin"

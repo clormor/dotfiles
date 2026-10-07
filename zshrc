@@ -14,12 +14,6 @@ if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-    export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-    export PATH=`gem environment gemdir`/bin:$PATH
-fi
-
 if command -v mise &>/dev/null; then
   eval "$(mise activate zsh)"
 fi
-
