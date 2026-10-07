@@ -1,7 +1,7 @@
 # .bashrc
 
 bash_shell="/bin/bash"
-curr_shell="$(echo $0)"
+curr_shell="$0"
 
 # Source global definitions
 if [ -f /etc/bashrc  -a $curr_shell = $bash_shell ]; then
@@ -32,7 +32,7 @@ alias la='ls -A'
 #fi
 
 # use gnu-tar
-if [ "$(which gtar)" != "" ]; then
+if command -v gtar >/dev/null 2>&1; then
     alias tar='gtar'
 fi
 
@@ -61,9 +61,7 @@ if [ -f ~/.trusted-certs ]; then
     fi
 fi
 
-which gpgconf >/dev/null
-gpgconf_available=$?
-if [ "$gpgconf_available" -eq "0" ]; then
+if command -v gpgconf >/dev/null 2>&1; then
     alias gpgagent='gpgconf --launch gpg-agent'
 fi
 
@@ -192,7 +190,7 @@ prepend_path_if_exists "$HOME/.local/bin"
 source_if_exists "$HOME/.git-prompt.sh"
 
 # Tell GPG what terminal to use for passphrase prompts
-export GPG_TTY=$(tty)
+export GPG_TTY="${TTY:-$(tty)}"
 
 # source tokens/secrets (not committed to source control)
 source_if_exists "$HOME/.tokens"
