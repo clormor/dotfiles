@@ -19,3 +19,9 @@ if command -v mise &>/dev/null; then
 fi
 
 setopt interactive_comments
+export NODE_AUTH_TOKEN="$GH_PAT"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/chris/.docker/completions $fpath)
+autoload -Uz compinit
+(( ${+_comps[docker]} )) || compinit
+# End of Docker CLI completions
