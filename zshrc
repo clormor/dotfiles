@@ -4,6 +4,10 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
+# Nested shells inherit FPATH, so prepending again would duplicate entries.
+# compinit rebuilds ~/.zcompdump whenever the completion file count changes,
+# which costs 200ms to several seconds on each switch between shell depths.
+typeset -U fpath
 fpath=(~/.zsh $fpath)
 zstyle ':completion:*:*:git:*' script ~/.git-completion
 
