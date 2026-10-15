@@ -6,3 +6,4 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+(( $+functions[_startup_mark] )) && _startup_mark zprofile
